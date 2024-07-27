@@ -1,0 +1,190 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %}
+{% block style %}  
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}"> 
+<style>
+    .search-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    .search-input {
+        flex: 1;
+        max-width: 600px;
+        padding: 12px;
+        font-size: 1.2rem; 
+    }
+    .search-button {
+        width: 100px;
+        margin-left: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+        font-size: 1.2rem; 
+    }
+    .search-result{
+        font-size: 2rem; 
+    }
+</style>
+{% endblock %}
+{% block content %}
+<br><br>
+<h4 class="text-center">Stone Stimulate lab</h4>
+<div class="container text-center my-5">
+    <h1>STONE - XSS STIMULATE</h1>
+    <br><br>
+    <form action="{{ url_for('views.search_product') }}" method="GET" class="d-flex justify-content-center mb-4 search-container">
+        <!-- <input type="text" name="query" class="form-control" placeholder="Search for products" style="max-width: 400px;"> -->
+        <input name="query" class="form-control search-input" placeholder="Search for products">
+        <button type="submit" class="btn btn-primary ml-2 search-button">Search</button>
+    </form>
+</div>
+<div class="search-result">
+    <!-- Trong Flask, |safe được sử dụng trong template 
+        để chỉ thị rằng nội dung của biến không cần phải được mã hóa HTML, 
+        cho phép bạn hiển thị nội dung mà không bị chuyển đổi các ký tự đặc biệt.  
+    -->
+    {{ response|safe }}
+</div>
+<br>
+<div class="container">
+    <div class="row">
+
+        {% for product in products %} 
+        <div class="col-md-3">
+            <div class="card product-card mb-4">
+                <img src="../static/img/{{product.picture}}" class="card-img-top" alt="The Bucket of Doom">
+                <div class="card-body">
+                    <h5 class="card-title">{{product.name}}</h5>
+                    <div class="product-rating">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                    </div>
+                    <p class="product-price">{{product.price}}</p>
+                    <a href="{{ url_for('views.request_product', productId=product.id) }}" class="btn btn-primary">View details</a>
+                </div>
+            </div>
+        </div>
+        {% endfor%}
+        
+        <div class="col-md-3">
+            <div class="card product-card mb-4">
+                <img src="../static/img/p2.jpg" class="card-img-top" alt="Pet Experience Days">
+                <div class="card-body">
+                    <h5 class="card-title">Pet Experience Days</h5>
+                    <div class="product-rating">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                    </div>
+                    <p class="product-price">$13.89</p>
+                    <a href="#" class="btn btn-primary">View details</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card product-card mb-4">
+                <img src="../static/img/p3.jpg" class="card-img-top" alt="Safety First">
+                <div class="card-body">
+                    <h5 class="card-title">Safety First</h5>
+                    <div class="product-rating">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                    </div>
+                    <p class="product-price">$26.39</p>
+                    <a href="#" class="btn btn-primary">View details</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card product-card mb-4">
+                <img src="../static/img/p2.jpg" class="card-img-top" alt="Your New Home Office">
+                <div class="card-body">
+                    <h5 class="card-title">Your New Home Office</h5>
+                    <div class="product-rating">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                    </div>
+                    <p class="product-price">$77.51</p>
+                    <a href="#" class="btn btn-primary">View details</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card product-card mb-4">
+                <img src="../static/img/p3.jpg" class="card-img-top" alt="Your New Home Office">
+                <div class="card-body">
+                    <h5 class="card-title">Your New Home Office</h5>
+                    <div class="product-rating">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                    </div>
+                    <p class="product-price">$77.51</p>
+                    <a href="#" class="btn btn-primary">View details</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card product-card mb-4">
+                <img src="../static/img/p1.jpg" class="card-img-top" alt="The Bucket of Doom">
+                <div class="card-body">
+                    <h5 class="card-title">The Bucket of Doom</h5>
+                    <div class="product-rating">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                    </div>
+                    <p class="product-price">$54.32</p>
+                    <a href="#" class="btn btn-primary">View details</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card product-card mb-4">
+                <img src="../static/img/p1.jpg" class="card-img-top" alt="Pet Experience Days">
+                <div class="card-body">
+                    <h5 class="card-title">Pet Experience Days</h5>
+                    <div class="product-rating">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                    </div>
+                    <p class="product-price">$13.89</p>
+                    <a href="#" class="btn btn-primary">View details</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card product-card mb-4">
+                <img src="../static/img/p1.jpg" class="card-img-top" alt="Safety First">
+                <div class="card-body">
+                    <h5 class="card-title">Safety First</h5>
+                    <div class="product-rating">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                    </div>
+                    <p class="product-price">$26.39</p>
+                    <a href="#" class="btn btn-primary">View details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

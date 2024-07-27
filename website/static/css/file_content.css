@@ -1,0 +1,11 @@
+.container {
+    margin-top: 30px;
+}
+.file-content {
+    white-space: pre-wrap; /* Giữ định dạng nội dung file */
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    padding: 10px;
+    min-height: 200px;
+    background-color: #f8f9fa;
+}

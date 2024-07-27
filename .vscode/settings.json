@@ -1,0 +1,11 @@
+{
+    "python.analysis.extraPaths": [
+        "./website"
+    ],
+    "cSpell.words": [
+        "werkzeug"
+    ],
+    "html.customData": [
+        "\"**/*.html.j2\""
+    ]
+}

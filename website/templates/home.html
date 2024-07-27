@@ -1,0 +1,153 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %}
+{% block style %}  <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}"> {% endblock %}
+{% block content %}
+<h1 class="text-center">This is homepage</h1>
+<h4 class="text-center">Stone Stimulate lab</h4>
+<div class="container text-center my-5">
+    <h1>WE LIKE TO STONE STIMULATE </h1>
+</div>
+<div class="container">
+    <div class="row">
+
+        {% for product in products %} 
+        <div class="col-md-3">
+            <div class="card product-card mb-4">
+                <img src="../static/img/{{product.picture}}" class="card-img-top" alt="The Bucket of Doom">
+                <div class="card-body">
+                    <h5 class="card-title">{{product.name}}</h5>
+                    <div class="product-rating">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                    </div>
+                    <p class="product-price">{{product.price}}</p>
+                    <a href="{{ url_for('views.request_product', productId=product.id) }}" class="btn btn-primary">View details</a>
+                </div>
+            </div>
+        </div>
+        {% endfor%}
+        
+        <div class="col-md-3">
+            <div class="card product-card mb-4">
+                <img src="../static/img/p2.jpg" class="card-img-top" alt="Pet Experience Days">
+                <div class="card-body">
+                    <h5 class="card-title">Pet Experience Days</h5>
+                    <div class="product-rating">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                    </div>
+                    <p class="product-price">$13.89</p>
+                    <a href="#" class="btn btn-primary">View details</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card product-card mb-4">
+                <img src="../static/img/p3.jpg" class="card-img-top" alt="Safety First">
+                <div class="card-body">
+                    <h5 class="card-title">Safety First</h5>
+                    <div class="product-rating">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                    </div>
+                    <p class="product-price">$26.39</p>
+                    <a href="#" class="btn btn-primary">View details</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card product-card mb-4">
+                <img src="../static/img/p2.jpg" class="card-img-top" alt="Your New Home Office">
+                <div class="card-body">
+                    <h5 class="card-title">Your New Home Office</h5>
+                    <div class="product-rating">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                    </div>
+                    <p class="product-price">$77.51</p>
+                    <a href="#" class="btn btn-primary">View details</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card product-card mb-4">
+                <img src="../static/img/p3.jpg" class="card-img-top" alt="Your New Home Office">
+                <div class="card-body">
+                    <h5 class="card-title">Your New Home Office</h5>
+                    <div class="product-rating">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                    </div>
+                    <p class="product-price">$77.51</p>
+                    <a href="#" class="btn btn-primary">View details</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card product-card mb-4">
+                <img src="../static/img/p1.jpg" class="card-img-top" alt="The Bucket of Doom">
+                <div class="card-body">
+                    <h5 class="card-title">The Bucket of Doom</h5>
+                    <div class="product-rating">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                    </div>
+                    <p class="product-price">$54.32</p>
+                    <a href="#" class="btn btn-primary">View details</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card product-card mb-4">
+                <img src="../static/img/p1.jpg" class="card-img-top" alt="Pet Experience Days">
+                <div class="card-body">
+                    <h5 class="card-title">Pet Experience Days</h5>
+                    <div class="product-rating">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                    </div>
+                    <p class="product-price">$13.89</p>
+                    <a href="#" class="btn btn-primary">View details</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card product-card mb-4">
+                <img src="../static/img/p1.jpg" class="card-img-top" alt="Safety First">
+                <div class="card-body">
+                    <h5 class="card-title">Safety First</h5>
+                    <div class="product-rating">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                    </div>
+                    <p class="product-price">$26.39</p>
+                    <a href="#" class="btn btn-primary">View details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

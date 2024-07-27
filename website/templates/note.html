@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %} Note {% endblock %}
+{% block style %} <link rel="stylesheet" href="{{ url_for('static', filename='css/note.css') }}"> {% endblock %}
+{% block content %}
+    <h1 align="center">Notes</h1>
+    <form method="POST" class="form-container">
+        <textarea name="note" id="note" class="form-control"></textarea>
+        <br>
+        <div align="center">
+            <button type="submit" class="btn btn-primary">Add Note</button>
+        </div>
+    </form>
+    <br>
+    <ul class="list-group" id="notes">
+        {% for note in user.notes %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">{{ note.data }}
+            <!-- eslint-disable-next-line -->
+            <button type="button" class="close  ml-auto btn btn-danger" onclick="deleteNote('{{ note.id }}')"> 
+                <span aria-didden="true">Remove</span>
+            </button>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

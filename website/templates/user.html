@@ -1,0 +1,29 @@
+{% extends "base.html" %} 
+{% block title %}User page{% endblock %}
+{% block style %}  <link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}"> {% endblock %}
+{% block content %}
+<div class="container account-container">
+    <h2 class="mb-4">My Account</h2>
+    <p>Your username is: <strong>{{user.firstName}} {{user.lastName}}</strong></p>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="email" class="form-label">Email: <strong>{{user.email}}</strong></label>
+            <br><br>
+            <input type="email" class="form-control" id="email" placeholder="Update your email">
+        </div>
+        <button type="button" class="btn btn-success mb-4">Update email</button>
+        <div class="avatar mb-3">
+            {% if user.avatar_url %}
+                <img src="{{ user.avatar_url }}" alt="Avatar" style="width: 100px; height: 100px;"/>
+            {% else %}
+                <span class="bi bi-person-circle" style="font-size: 50px;"></span>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            <label for="avatar" class="form-label">Avatar:</label>
+            <input type="file" class="form-control" id="avatar" name="avatar">
+        </div>
+        <button type="submit" class="btn btn-success">Upload</button>
+    </form>
+</div>
+{% endblock %}

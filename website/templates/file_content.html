@@ -1,0 +1,18 @@
+{% extends "base.html" %} 
+{% block title %}User page{% endblock %}
+{% block style %}  <link rel="stylesheet" href="{{ url_for('static', filename='css/file_content.css') }}"> {% endblock %}
+{% block content %}
+<div class="container">
+    <h1 class="text-center mb-4">File Reader</h1>
+    <form method="post" class="mb-4">
+        <div class="mb-3">
+            <label for="file_name" class="form-label">File Name:</label>
+            <input type="text" id="file_name" name="file_name" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Read File</button>
+    </form>
+    <div class="file-content">
+        {{ file_content }}
+    </div>
+</div>
+{% endblock %}

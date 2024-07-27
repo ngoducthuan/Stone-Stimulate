@@ -1,0 +1,11 @@
+.container {
+    max-width: 1000px;
+}
+.result {
+    margin-top: 20px;
+}
+pre {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+}

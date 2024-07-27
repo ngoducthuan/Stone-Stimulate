@@ -1,0 +1,31 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %}
+{% block style %}  <link rel="stylesheet" href="{{ url_for('static', filename='css/product.css') }}"> {% endblock %}
+{% block content %}
+<div class="container text-center my-5">
+    <h1>PRODUCT DETAILED </h1>
+</div>
+<div class="card mb-4">
+    <!-- <img src="../static/img/{{product.picture}}" class="card-img-top" alt="The Bucket of Doom"> -->
+    <img src="/image?filename={{product.picture}}" class="card-img-top" alt="Portable Hat" id="productImage">
+    <div class="card-body">
+        <h5 class="card-title">{{product.name}}</h5>
+        <div class="product-rating text-warning">
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+        </div>
+        <p class="card-text mt-2">{{product.price}}</p>
+        <p class="card-text">
+            {{product.description}}
+            <br><br>
+            This Portable hat will be the best thing you buy yourself this year. It can be worn on your head for ease of transportation, lightweight but sturdy it will keep your head dry should you happen upon some inclement weather. Exceptionally durable without compromising on style, it can be worn for all occasions large or small.
+            <br><br>
+            Should you become overheated or weary you can also use it as a small seat to rest your tired legs. Beware, others may try and part you from your hat, as they aren't lucky enough to have this top-selling item of 2018. Spread the word, the best-kept secrets are meant to be shared, even if it's with just one other person.
+            <br><br>
+            This hat comes in only one color, black, as we know that black goes with everything. But we are prepared to customize your Portable Hat at no extra charge, we just want you to be happy, and to tell all your friends and family, as due to the excellent construction of this hat repeat sales are low. That's our guarantee to you.
+        </p>
+    </div>
+</div>
+{% endblock %}

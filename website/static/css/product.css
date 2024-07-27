@@ -1,0 +1,5 @@
+.card-img-top {
+    width: 50%;
+    height: auto; /* Adjust the height as needed */
+    object-fit: constain; /* Maintain aspect ratio and cover the area */
+}

@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %}
+{% block style %}  <link rel="stylesheet" href="{{ url_for('static', filename='css/stored-xss.css') }}"> {% endblock %}
+{% block content %}
+<div class="container text-center my-5">
+    <h1> Stone - Stored Stimulate </h1>
+</div>
+<div class="container">
+    <div class="row">
+        {% for product in products %} 
+        <div class="col-md-3">
+            <div class="card product-card mb-4">
+                <img src="../static/img/{{product.picture}}" class="card-img-top" alt="The Bucket of Doom">
+                <div class="card-body">
+                    <h5 class="card-title">{{product.name}}</h5>
+                    <div class="product-rating">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                    </div>
+                    <p class="product-price">{{product.price}}$</p>
+                    <a href="{{ url_for('views.request_product', productId=product.id) }}" class="btn btn-primary">View details</a>
+                </div>
+            </div>
+        </div>
+        {% endfor%}
+{% endblock %}

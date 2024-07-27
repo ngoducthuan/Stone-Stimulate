@@ -1,0 +1,15 @@
+{% extends "base.html" %} 
+{% block title %}Hash page{% endblock %}
+{% block style %}  <link rel="stylesheet" href="{{ url_for('static', filename='css/check_hash.css') }}"> {% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Check URL</h1>
+    <form id="checkHashForm" method="POST" onsubmit="submitForm(event)" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="hash" id="hash" class="form-control" placeholder="Enter hash" required>
+            <button type="submit" class="btn btn-primary">Check Hash</button>
+        </div>
+    </form>
+    <div id="result" class="mt-4"></div>
+</div>
+{% endblock %}

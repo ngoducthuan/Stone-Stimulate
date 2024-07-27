@@ -1,0 +1,67 @@
+/* CSS để căn giữa "Price" và "View details" trong sản phẩm */
+.product-card img {
+    width: 100%;
+    height: auto;
+}
+
+.product-card .card-img-top {
+    width: 100%; /* Chiều rộng là 100% của phần tử cha (.card) */
+    max-height: 200px; /* Chiều cao tự động để giữ tỷ lệ khung hình */
+}
+
+.product-rating {
+    color: #f8d64e;
+}
+.product-price {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.product-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .product-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .product-card .card-img-top {
+    width: 100%;
+    height: auto;
+  }
+  
+  .product-card .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .product-card .card-title {
+    font-size: 1.2rem;
+    margin-top: 10px;
+  }
+  
+  .product-card .product-rating {
+    color: #f39c12; /* Màu cam */
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .product-card .product-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .product-card .btn-primary {
+    width: 100%;
+  }
+  
+  /* Hiệu ứng hover cho sản phẩm */
+  .product-card:hover {
+    transform: translateY(-5px);
+  }

@@ -1,0 +1,33 @@
+{% extends "base.html" %} 
+{% block title %}User page{% endblock %}
+{% block content %}
+    <br><br>
+    <h3 class="mb-4 text-center">This is Admin page</h3>
+    <br><br>
+    <table class="table table-striped">
+        <thead class="table-light bg-info text-white">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Email</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Note</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+          <tr>
+            <th scope="row"> {{ loop.index }}</th>
+            <td> {{ user[1] }}</td>
+            <td> {{ user[3] }}</td>
+            <td> {{ user[4] }}</td>
+            <td>
+                <button type="button" class="close  ml-auto btn btn-danger" onclick="deleteUser('{{ user[1] }}')">
+                    <span aria-didden="true">Remove</span>
+                </button>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+{% endblock %}
