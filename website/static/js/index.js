@@ -68,3 +68,36 @@ function submitForm(event) {
         resultDiv.innerHTML = `<h2>Error: ${error.message}</h2>`;
     });
 }
+// Not related
+// document.getElementById('submitComment').addEventListener('click', function() {
+//     const comment = document.getElementById('comment').value;
+//     const username = document.getElementById('username').value;
+//     const productId = document.getElementById('productId').value;
+
+//     fetch('/stored-xss/comment', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({ comment: comment, username: username, product_id: productId})
+//     })
+    // .then(response => response.json())
+    // .then(data => {
+    //     console.log('Success:', data);
+    //     if (data.status === 'success') {
+    //         // Optionally, add the new comment to the UI without refreshing
+    //         const commentSection = document.getElementById('comment-section');
+    //         const newComment = document.createElement('div');
+    //         newComment.textContent = `${username}: ${comment}`;
+    //         commentSection.appendChild(newComment);
+
+    //         // Clear the textarea
+    //         document.getElementById('comment').value = '';
+    //     } else {
+    //         console.error('Error:', data.message);
+    //     }
+    // })
+//     .catch((error) => {
+//         console.error('Error:', error);
+//     });
+// });

@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from website import db
 from flask_login import UserMixin, current_user # type: ignore
 from sqlalchemy.sql import func # type: ignore
@@ -51,13 +51,15 @@ class Product(db.Model):
     price = db.Column(db.Float, nullable=False)
     description = db.Column(db.Text, nullable=True)
     picture = db.Column(db.String(200), nullable=True)
+    rating = db.Column(db.Float, nullable=False, default=0.0)  # Thêm trường rating
 
-    def __init__(self, name, price, description, picture, id=None):
+    def __init__(self, name, price, description, picture, rating, id=None):
         self.id = id
         self.name = name
         self.price = price
         self.description = description
         self.picture = picture
+        self.rating = rating
         
     def __repr__(self):
         return f"<Product {self.id}>"
@@ -68,16 +70,16 @@ class Comment(db.Model):
     name = db.Column(db.String(100), nullable=False)
     comment = db.Column(db.Text, nullable=False)
     rating = db.Column(db.Integer, nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    created_at = db.Column(db.String(100), default=lambda: datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S'))
     product = db.relationship('Product', backref=db.backref('comments', lazy=True))
 
-    def __init__(self, product_id, name, comment, rating, created_at, id=None):
+    def __init__(self, product_id, name, comment, rating, created_at = None, id=None):
         self.id = id
         self.product_id = product_id
         self.name = name
         self.comment = comment
         self.rating = rating
-        self.created_at = created_at
+        self.created_at = created_at or datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')
 
     def __repr__(self):
         return f"<Comment {self.id}>"

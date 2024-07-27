@@ -1,0 +1,98 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %}
+{% block style %}  <link rel="stylesheet" href="{{ url_for('static', filename='css/stored-xss-detailed.css') }}"> {% endblock %}
+{% block content %}
+<div class="container text-center my-5">
+    <h1>Stone - Stored XSS Stimulate Product Detailed </h1>
+</div>
+<div class="card mb-4 product-container">
+    <!-- <img src="../static/img/{{product.picture}}" class="card-img-top" alt="The Bucket of Doom"> -->
+    <img src="/image?filename={{product.picture}}" class="card-img-top" alt="Portable Hat" id="productImage">
+    <div class="card-body">
+        <h5 class="card-title">{{product.name}}</h5>
+        <div class="product-rating text-warning">
+            {% for i in range(1, 6) %}
+                {% if i <= product.rating|floor %}
+                    <i class="bi bi-star-fill"></i>
+                {% elif i == product.rating|ceil and product.rating % 1 != 0 %}
+                    <i class="bi bi-star-half"></i>
+                {% else %}
+                    <i class="bi bi-star"></i>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <p class="card-text mt-2"><strong>Price: </strong>{{product.price}}$</p>
+        <p class="card-text">
+            {{product.description}}
+            <br><br>
+            This Portable hat will be the best thing you buy yourself this year. It can be worn on your head for ease of transportation, lightweight but sturdy it will keep your head dry should you happen upon some inclement weather. Exceptionally durable without compromising on style, it can be worn for all occasions large or small.
+            <br><br>
+            Should you become overheated or weary you can also use it as a small seat to rest your tired legs. Beware, others may try and part you from your hat, as they aren't lucky enough to have this top-selling item of 2018. Spread the word, the best-kept secrets are meant to be shared, even if it's with just one other person.
+            <br><br>
+            This hat comes in only one color, black, as we know that black goes with everything. But we are prepared to customize your Portable Hat at no extra charge, we just want you to be happy, and to tell all your friends and family, as due to the excellent construction of this hat repeat sales are low. That's our guarantee to you.
+        </p>
+    </div>
+</div>
+<br><br><br>
+<div>
+    <h3>What do you think?</h3>
+    <br>
+    <div class="comment-count">10 Comment</div> <!-- Số lượng bình luận -->
+    <hr>
+    <div class="comment-section">
+        <!-- <div class="comment-input">
+            <input type="hidden" id="username" value="{{ user.lastName }}">
+            <input type="hidden" id="productId" value="{{ product.id }}">
+            <textarea id="comment" placeholder="Join the discussion..." rows="4"></textarea>
+            <button type="button" id="submitComment">Comment</button>
+        </div> -->
+        <form method="post" class="comment-input">
+            <input type="hidden" name="username" value="{{ user.lastName }}">
+            <input type="hidden" name="productId" value="{{ product.id }}">
+            <textarea name="comment" placeholder="Join the discussion..." rows="4"></textarea>
+            <button type="submit">Comment</button>
+        </form>
+
+        {% if comments %}
+            {% for comment in comments %}
+                <div class="comment-box">
+                    <div class="avatar">Z</div>
+                    <div class="comment-content">
+                        <span class="name">{{comment.user}}</span>
+                        <span class="time">{{comment.created_at}}</span>
+                        <span class="text">{{comment.comment|safe}}</span>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No comments yet. Be the first to comment!</p>
+        {% endif %}
+
+        <div class="comment-box">
+            <div class="avatar">S</div>
+            <div class="comment-content">
+                <span class="name">Shiyu Fang</span>
+                <span class="time">5 months ago</span>
+                <span class="text">国家精通会不会</span>
+            </div>
+        </div>
+
+        <div class="comment-box">
+            <div class="avatar">Z</div>
+            <div class="comment-content">
+                <span class="name">zhang junxian</span>
+                <span class="time">2 months ago</span>
+                <span class="text">hhhhh</span>
+            </div>
+        </div>
+
+        <div class="comment-box">
+            <div class="avatar">S</div>
+            <div class="comment-content">
+                <span class="name">Shiyu Fang</span>
+                <span class="time">5 months ago</span>
+                <span class="text">ddd</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

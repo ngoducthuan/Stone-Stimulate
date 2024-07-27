@@ -5,6 +5,8 @@ from os import path
 from flask_login import LoginManager
 from flask_admin.contrib.sqla import ModelView
 from flask_migrate import Migrate
+from math import floor, ceil
+import math
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -48,6 +50,14 @@ def create_app():
             return User.query.get((int(id)))
         except ValueError:
             print("Error")  # Handle case where id cannot be converted to integer
+    #Declare floor and ceil to filter in page stored_xss website page
+    @app.template_filter('floor')
+    def floor_filter(value):
+        return math.floor(value)
+
+    @app.template_filter('ceil')
+    def ceil_filter(value):
+        return math.ceil(value)
 
     return app
 
