@@ -30,12 +30,14 @@ def create_app():
     from .backend.notes import note
     from .backend.manage import manage
     from .backend.stored_xss import stored_xss
+    from .backend.dom_xss import dom_xss
 
     app.register_blueprint(views, url_prefix="/")
     app.register_blueprint(auth, url_prefix="/")
     app.register_blueprint(note, url_prefix="/")
     app.register_blueprint(manage, url_prefix="/")
     app.register_blueprint(stored_xss, url_prefix="/")
+    app.register_blueprint(dom_xss, url_prefix="/")
     from .backend.models import User, Note
 
     create_database(app)

@@ -1,0 +1,125 @@
+{% extends "base.html" %} {% block title %}DOM Xss{% endblock %}
+{% block style %}  
+<link rel="stylesheet" href="{{ url_for('static', filename='css/stored-xss.css') }}"> 
+<style>
+    .search-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    .search-input {
+        flex: 1;
+        max-width: 600px;
+        padding: 12px;
+        font-size: 1.2rem; 
+    }
+    .search-button {
+        width: 100px;
+        margin-left: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+        font-size: 1.2rem; 
+    }
+    .search-result{
+        font-size: 2rem; 
+    }
+    .product-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .product-card-container {
+        flex: 0 1 calc(25% - 20px); /* Chiếm 25% chiều rộng trừ đi khoảng cách */
+        margin: 10px;
+    }
+</style>{% endblock %}
+{% block content %}
+<div class="container text-center my-5">
+    <h1> Stone - DOM XSS Stimulate </h1>
+    <br><br>
+    <form method="GET" class="d-flex justify-content-center mb-4 search-container" id="search-form">
+        <!-- <input type="text" name="query" class="form-control" placeholder="Search for products" style="max-width: 400px;"> -->
+        <input name="query" id="search-input" class="form-control search-input" placeholder="Search for products">
+        <button type="submit" class="btn btn-primary ml-2 search-button">Search</button>
+    </form>
+</div>
+
+<p id="search-result" style="display: none; font-size: 2rem; margin-left: 1rem;">
+    <span id="search-query"></span>
+</p>
+<br>
+<div class="container">
+    <div class="row product-list" id="product-container">
+        {% for product in products %} 
+        <div class="col-md-3 product-card-container" data-product-id="{{ product.id }}">
+            <div class="card product-card mb-4">
+                <img src="../static/img/{{product.picture}}" class="card-img-top" alt="The Bucket of Doom">
+                <div class="card-body">
+                    <h5 class="card-title">{{product.name}}</h5>
+                    <div class="product-rating">
+                        {% for i in range(1, 6) %}
+                            {% if i <= product.rating|floor %}
+                                <i class="bi bi-star-fill"></i>
+                            {% elif i == product.rating|ceil and product.rating % 1 != 0 %}
+                                <i class="bi bi-star-half"></i>
+                            {% else %}
+                                <i class="bi bi-star"></i>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <p class="product-price">{{product.price}}$</p>
+                    <a href="{{ url_for('stored_xss.product_requested', productId=product.id) }}" class="btn btn-primary">View details</a>
+                </div>
+            </div>
+        </div>
+        {% endfor%}
+    </div>
+</div>
+<script type="application/json" id="products-data">{{ products|tojson|safe }}</script>
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const searchInput = document.getElementById('search-input');
+        const productContainer = document.getElementById('product-container');
+        const searchResult = document.getElementById('search-result');
+        const searchQuerySpan = document.getElementById('search-query');
+        const productsDataElement = document.getElementById('products-data');
+
+        if (!searchInput || !productContainer || !searchResult || !searchQuerySpan || !productsDataElement) {
+            console.error('One or more required elements are missing from the DOM.');
+            return;
+        }
+
+        const products = JSON.parse(productsDataElement.textContent);
+
+        function searchProducts() {
+            const query = searchInput.value.toLowerCase();
+            const productCards = productContainer.getElementsByClassName('product-card-container');
+            
+            // Hiển thị hoặc ẩn sản phẩm dựa trên kết quả tìm kiếm
+            Array.from(productCards).forEach(card => {
+                const productId = card.getAttribute('data-product-id');
+                const product = products.find(p => p.id == productId);
+                if (product && product.name.toLowerCase().includes(query)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Hiển thị hoặc ẩn kết quả tìm kiếm
+            if (query) {
+                searchResult.style.display = 'block';
+                searchQuerySpan.innerHTML = `<strong>You searched for</strong>: ${query}`;
+            } else {
+                searchResult.style.display = 'none';
+            }
+        }
+
+        // Bind search function to form submit
+        document.getElementById('search-form').addEventListener('submit', (event) => {
+            event.preventDefault();
+            searchProducts();
+        });
+    });
+</script>
+{% endblock %}
